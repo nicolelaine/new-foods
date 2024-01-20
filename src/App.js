@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import NewFoodInput from "./NewFoodInput";
+import Food from "./Food";
 import "./styles.css";
 
 export default function App() {
@@ -8,6 +9,11 @@ export default function App() {
   const addFoodItem = (food) => {
        
        setFoodsToTry([...foodsToTry, food]);
+    };
+
+    const deleteFood = (foodToDelete) => {
+          const updatedFood = foodsToTry.filter((food) => food !== foodToDelete)
+          setFoodsToTry(updatedFood)
     }
 
   return (
@@ -16,7 +22,7 @@ export default function App() {
       <NewFoodInput addFoodItem={addFoodItem} />
       <ul className="food-list">
           {foodsToTry.map((food, index) => (
-            <li key={index}>{food}</li>
+            <Food key={index} food={food} deleteFood={deleteFood}/>
           ))}
       </ul>
     </div>
